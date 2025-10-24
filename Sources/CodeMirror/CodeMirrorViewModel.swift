@@ -16,10 +16,10 @@ public class CodeMirrorViewModel: ObservableObject {
     internal var executeJS: ((JavascriptFunction, JavascriptCallback?) -> Void)!
 
 	/// DarkMode, default is setting on true
-	@Published public var darkMode	   : Bool	  = true
-	@Published public var lineWrapping: Bool 	  = false
-	@Published public var readOnly    : Bool 	  = false
-    @Published public var language	   : Language = .json
+	@Published public var darkMode	  : Bool     = true
+	@Published public var lineWrapping: Bool 	 = false
+	@Published public var readOnly    : Bool     = false
+    @Published public var language	  : Language = .json
 
 	/// Execute javascript code in async mode
     private func executeJSAsync<T>(f: JavascriptFunction) async throws -> T? {
