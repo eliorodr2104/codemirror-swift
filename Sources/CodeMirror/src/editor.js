@@ -8,6 +8,7 @@ import { json } from "@codemirror/lang-json";
 import { xml } from "@codemirror/lang-xml";
 import { css } from "@codemirror/lang-css";
 import { oneDark } from "@codemirror/theme-one-dark";
+import { rv32i } from "./lang-rv32i/index.js";
 
 import {
   lineNumbers,
@@ -51,6 +52,7 @@ const SUPPORTED_LANGUAGES_MAP = {
   css,
   xml,
   txt: () => [],
+  rv32i,
 };
 
 const baseTheme = EditorView.baseTheme({

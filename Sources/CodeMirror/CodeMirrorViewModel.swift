@@ -2,17 +2,26 @@ import SwiftUI
 
 @MainActor
 public class CodeMirrorViewModel: ObservableObject {
+	
+	/// Func to execute when text is load
     public var onLoadSuccess: (() -> Void)?
+	
+	/// Func to execute when loading is failed
     public var onLoadFailed: ((Error) -> Void)?
+	
+	/// Func to execute when text is modified
     public var onContentChange: (() -> Void)?
 
+	/// Execute javascript code
     internal var executeJS: ((JavascriptFunction, JavascriptCallback?) -> Void)!
 
-    @Published public var darkMode = false
-    @Published public var lineWrapping = false
-    @Published public var readOnly = false
-    @Published public var language: Language = .json
+	/// DarkMode, default is setting on true
+	@Published var darkMode	   : Bool	  = true
+	@Published var lineWrapping: Bool 	  = false
+	@Published var readOnly    : Bool 	  = false
+    @Published var language	   : Language = .json
 
+	/// Execute javascript code in async mode
     private func executeJSAsync<T>(f: JavascriptFunction) async throws -> T? {
         return try await withCheckedThrowingContinuation { continuation in
             executeJS(f) { result in
@@ -21,14 +30,12 @@ public class CodeMirrorViewModel: ObservableObject {
         }
     }
 
+	/// Get text file modified
     public func getContent() async throws -> String? {
-        try await executeJSAsync(
-            f: JavascriptFunction(
-                functionString: "CodeMirror.getContent()"
-            )
-        )
+        try await executeJSAsync(f: JavascriptFunction(functionString: "CodeMirror.getContent()"))
     }
 
+	/// Set text file open
     public func setContent(_ value: String) {
         executeJS(
             JavascriptFunction(

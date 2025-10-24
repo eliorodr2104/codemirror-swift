@@ -5,4 +5,5 @@ public enum Language: String, CaseIterable, Hashable {
     case css
     case xml
     case txt
+	case rv32i
 }

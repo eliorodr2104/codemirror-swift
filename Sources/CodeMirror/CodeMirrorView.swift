@@ -34,7 +34,7 @@ public struct CodeMirrorView: NativeView {
     #endif
 
     private func createWebView(context: Context) -> WKWebView {
-        let preferences = WKPreferences()
+        let preferences    = WKPreferences()
         let userController = WKUserContentController()
         userController.add(context.coordinator, name: ScriptMessageName.codeMirrorDidReady)
         userController.add(context.coordinator, name: ScriptMessageName.codeMirrorContentDidChange)
